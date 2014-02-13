@@ -1,4 +1,4 @@
-package ru.abrarov.topbuilder;
+package ru.abrarov.javatests.topbuilder;
 
 import java.util.Iterator;
 import java.util.List;

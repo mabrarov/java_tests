@@ -1,4 +1,4 @@
-package ru.abrarov.topbuilder;
+package ru.abrarov.javatests.topbuilder;
 
 import junit.framework.TestCase;
 

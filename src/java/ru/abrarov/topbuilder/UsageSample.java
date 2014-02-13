@@ -12,14 +12,13 @@ import java.util.List;
 public class UsageSample {
 
     public static void main(String[] args) {
-        // Parse command line params
+        // Parse command line args and get user defined parameters of the source data generation and the top list size
         final Parameters parameters = new Parameters(args);
         // Build randomized source data to be analyzed
         final Collection<String> sourceValues = buildRandomValues(parameters);
         if (parameters.showSourceData) {
             printSourceData(sourceValues);
         }
-        // Get user defined parameters of the top list to be built
         // Create solver and analyze source data
         final FrequencyAnalyzer frequencyAnalyzer = buildFrequencyAnalyzer(parameters);
         printStartNotification();
@@ -58,7 +57,7 @@ public class UsageSample {
         public final boolean showSourceData;
 
         /**
-         * Parses commandline parameters and builds app parameters according the parsed data.
+         * Parses commandline parameters and builds app parameters according to the parsed data.
          *
          * @param args Commandline parameters to be parsed and used for building app parameters.
          */

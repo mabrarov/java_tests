@@ -7,8 +7,8 @@ import java.util.*;
  * Uses {@link java.util.HashMap java.util.HashMap} to build distribution of the analyzed values so the number of unique
  * values (among the analyzed ones) and their hashes distribution are the most significant factors for memory
  * consumption (the first of this factors) and performance.
- * The most narrow place is usage of {@link java.util.Collections#sort java.util.Collections.sort}
- * so the complexity of {@link #buildTopFrequentList} is o(n * log(n)).
+ * Because of usage of java.util.HashMap and {@link java.util.Collections#sort java.util.Collections.sort} the
+ * complexity of {@link #buildTopFrequentList} is o(n * log(n)).
  *
  * @see FrequencyAnalyzer
  */

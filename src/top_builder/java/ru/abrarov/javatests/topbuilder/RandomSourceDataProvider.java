@@ -21,7 +21,7 @@ public class RandomSourceDataProvider {
      * Builds list of random strings.
      *
      * @param minValueLength   Minimum length of string to be generated. Must be >= 0 and <= maxValueLength.
-     * @param maxValueLength   Maximum length of string to be generated. Must be >= 0 adn >= minValueLength.
+     * @param maxValueLength   Maximum length of string to be generated. Must be >= 0 and >= minValueLength.
      * @param uniqueValueCount Number of unique strings to be generated. Must be >= 0.
      * @param totalValueCount  Total number of strings to be generated. Equals to the size (defines the size)
      *                         of the built list. Must be >= 0.

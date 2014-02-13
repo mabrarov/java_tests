@@ -23,6 +23,7 @@ public class RandomUtils {
      */
     public static int randomInt(Random random, int min, int max) {
         assert min <= max : "min must be <= max";
+
         return random.nextInt(max - min) + min;
     }
 
@@ -37,6 +38,10 @@ public class RandomUtils {
     public static String randomString(char[] alphabet, int length, Random random) {
         assert length >= 0 : "length must be >= 0";
         assert alphabet.length > 0 : "alphabet must be not empty";
+
+        if (length == 0) {
+            return "";
+        }
         final StringBuilder valueBuilder = new StringBuilder(length);
         for (int j = 0; j < length; ++j) {
             final int alphabetPos = randomInt(random, 0, alphabet.length);
@@ -57,6 +62,7 @@ public class RandomUtils {
     public static <T> List<T> randomFilledList(List<T> values, int listSize, Random random) {
         assert !(values.isEmpty() && listSize > 0) : "listSize > 0 is not permitted for non empty values";
         assert !values.isEmpty() && listSize < 0 : "listSize <= 0 is permitted for empty values only";
+
         final int valuesCount = values.size();
         final List<T> result = new ArrayList<T>(listSize);
         for (int i = 0; i < listSize; i++) {

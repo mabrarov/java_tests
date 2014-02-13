@@ -42,6 +42,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
     @Override
     public List<Item> buildTopFrequentList(Iterator<String> values, int size) {
         assert size >= 0 : "Size of the list must be >= 0";
+
         final List<DistributionItem> valueDistribution =
                 new ArrayList<DistributionItem>(buildDistributionMap(values).values());
         final List<DistributionItem> topFrequentDistributionItems =

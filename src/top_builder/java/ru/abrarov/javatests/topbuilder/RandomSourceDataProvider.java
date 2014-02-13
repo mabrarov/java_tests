@@ -20,15 +20,21 @@ public class RandomSourceDataProvider {
     /**
      * Builds list of random strings.
      *
-     * @param minValueLength   Minimum length of string to be generated.
-     * @param maxValueLength   Maximum length of string to be generated.
-     * @param uniqueValueCount Number of unique strings to be generated.
-     * @param totalValueCount  Total number of strings to be generated.
-     *                         Equals to the size (defines the size) of the built list.
+     * @param minValueLength   Minimum length of string to be generated. Must be >= 0 and <= maxValueLength.
+     * @param maxValueLength   Maximum length of string to be generated. Must be >= 0 adn >= minValueLength.
+     * @param uniqueValueCount Number of unique strings to be generated. Must be >= 0.
+     * @param totalValueCount  Total number of strings to be generated. Equals to the size (defines the size)
+     *                         of the built list. Must be >= 0.
      * @return List of the desired size (totalValueCount) containing random strings of the desired length limits.
      */
     public List<String> buildRandomValues(int minValueLength, int maxValueLength, int uniqueValueCount,
                                           int totalValueCount) {
+        assert minValueLength >= 0 : "minValueLength must be >= 0";
+        assert maxValueLength >= 0 : "maxValueLength must be >= 0";
+        assert uniqueValueCount >= 0 : "uniqueValueCount must be >= 0";
+        assert totalValueCount >= 0 : "totalValueCount must be >= 0";
+        assert minValueLength <= maxValueLength : "minValueLength must be <= maxValueLength";
+
         final List<String> uniqueValues = buildUniqueValues(minValueLength, maxValueLength, uniqueValueCount);
         return RandomUtils.randomFilledList(uniqueValues, totalValueCount, random);
     }

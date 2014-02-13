@@ -17,13 +17,13 @@
     <file path="/RandomStringBuilder.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392274249116" ignored="false" />
     <file path="/RandomUtils.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392309761793" ignored="false" />
     <file path="/RandomFilledCollectionBuilder.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392272710276" ignored="false" />
-    <file path="/a.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392308218016" ignored="false" />
-    <file path="/sample.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392280466191" ignored="false" />
+    <file path="/a.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392315158722" ignored="false" />
+    <file path="/sample.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392315154446" ignored="false" />
     <file path="/UsageSample.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392307993146" ignored="false" />
-    <file path="/NaiveFrequencyAnalyzer.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392311297120" ignored="false" />
+    <file path="/NaiveFrequencyAnalyzer.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392314698104" ignored="false" />
     <file path="/a.dummy" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392311235408" ignored="false" />
     <file path="/RandomSourceDataProvider.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392309965617" ignored="false" />
-    <file path="/NaiveFrequencyAnalyzerTest.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392305921979" ignored="false" />
+    <file path="/NaiveFrequencyAnalyzerTest.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392314742185" ignored="false" />
     <file path="/FrequencyAnalyzer.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392304528744" ignored="false" />
     <file path="/ConcurrentFrequencyAnalyzer.java" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392303673526" ignored="false" />
     <file path="/Dummy.txt" changelist="6c8ac6f7-545f-45df-b18c-2cd59b30180f" time="1392309126276" ignored="false" />
@@ -122,7 +122,7 @@
       <file leaf-file-name="NaiveFrequencyAnalyzerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../src/top_builder/test/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="8" selection-start="8" selection-end="28" vertical-scroll-proportion="0.0">
+            <state line="136" column="30" selection-start="4932" selection-end="4932" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -131,7 +131,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../src/tcp_proxy/java/ru/abrarov/javatests/tcpproxy/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="32" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
+            <state line="4" column="3" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -149,7 +149,7 @@
       <file leaf-file-name="FrequencyAnalyzer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/FrequencyAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="22" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
+            <state line="38" column="71" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -158,9 +158,10 @@
       <file leaf-file-name="NaiveFrequencyAnalyzer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="28" selection-start="645" selection-end="645" vertical-scroll-proportion="0.25793245">
+            <state line="47" column="9" selection-start="1989" selection-end="2059" vertical-scroll-proportion="0.93345654">
               <folding>
                 <element signature="e#796#814#0" expanded="true" />
+                <element signature="e#4998#5004#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -212,8 +213,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../../src/java/ru/abrarov/Main.java" />
-        <option value="$PROJECT_DIR$/../../src/java/ru/abrarov/topbuilder/Main.java" />
         <option value="$PROJECT_DIR$/../../src/java/ru/abrarov/topbuilder/Application.java" />
         <option value="$PROJECT_DIR$/../../src/java/ru/abrarov/topbuilder/UsageSampleApp.java" />
         <option value="$PROJECT_DIR$/../../src/java/ru/abrarov/topbuilder/RandomSourceDataProvider.java" />
@@ -227,6 +226,8 @@
         <option value="$PROJECT_DIR$/../../src/tcp_proxy/java/ru/abrarov/javatests/tcpproxy/Main.java" />
         <option value="$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/RandomUtils.java" />
         <option value="$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/RandomSourceDataProvider.java" />
+        <option value="$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/FrequencyAnalyzer.java" />
+        <option value="$PROJECT_DIR$/../../src/top_builder/test/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzerTest.java" />
         <option value="$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzer.java" />
       </list>
     </option>
@@ -272,6 +273,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="java_tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java_tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="top_builder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="topbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -362,7 +381,7 @@
       <recent name="D:\Users\Marat\Documents\work\java\ACI\test\src\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.top_builder with invalid top min value length">
+  <component name="RunManager" selected="JUnit.NaiveFrequencyAnalyzerTest">
     <configuration default="false" name="NaiveFrequencyAnalyzerTest.testSimpleValuesWithDiferentFrequencies" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -665,17 +684,17 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901296" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.670987" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.670987" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4346959" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5653041" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4346959" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901296" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296767" sideWeight="0.670987" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -790,20 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/FrequencyAnalyzer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="22" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../src/top_builder/test/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="8" selection-start="8" selection-end="28" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../src/tcp_proxy/resources/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -813,7 +818,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../src/tcp_proxy/java/ru/abrarov/javatests/tcpproxy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
+        <state line="4" column="3" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -839,11 +844,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/FrequencyAnalyzer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="71" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../src/top_builder/test/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="136" column="30" selection-start="4932" selection-end="4932" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../src/top_builder/java/ru/abrarov/javatests/topbuilder/NaiveFrequencyAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="28" selection-start="645" selection-end="645" vertical-scroll-proportion="0.25793245">
+        <state line="47" column="9" selection-start="1989" selection-end="2059" vertical-scroll-proportion="0.93345654">
           <folding>
             <element signature="e#796#814#0" expanded="true" />
+            <element signature="e#4998#5004#0" expanded="true" />
           </folding>
         </state>
       </provider>

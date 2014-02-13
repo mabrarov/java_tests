@@ -127,6 +127,27 @@ public class NaiveFrequencyAnalyzerTest extends TestCase {
     }
 
     /**
+     * Test set is not empty and given list size is 0.
+     */
+    public void testZeroListSize() {
+        printTestHeader();
+        final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
+
+        final List<String> values = buildSourceDataWithSomeEqualFrequencies();
+        final int listSize = 0;
+        printSourceDataAndTestParams(values, listSize);
+
+        final List<FrequencyAnalyzer.Item> expectedResult = Collections.emptyList();
+        printExpectedResult(expectedResult);
+
+        final List<FrequencyAnalyzer.Item> actualResult =
+                frequencyAnalyzer.buildTopFrequentList(values.iterator(), listSize);
+        printActualResult(actualResult);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    /**
      * Test invalid arguments.
      */
     public void testInvalidListSize() {

@@ -14,6 +14,31 @@ import java.util.*;
  */
 public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
 
+    private static final Comparator<DistributionItem> DISTRIBUTION_ITEM_COMPARATOR =
+            new Comparator<DistributionItem>() {
+                @Override
+                public int compare(DistributionItem left, DistributionItem right) {
+                    final int leftFrequency = left.frequency();
+                    final int rightFrequency = right.frequency();
+                    if (leftFrequency > rightFrequency) {
+                        return -1;
+                    }
+                    if (leftFrequency < rightFrequency) {
+                        return 1;
+                    }
+                    // If frequencies are equal then compare values to make results of algorithm predictable
+                    final String leftValue = left.value();
+                    final String rightValue = right.value();
+                    if (leftValue == null) {
+                        if (rightValue == null) {
+                            return 0;
+                        }
+                        return 1;
+                    }
+                    return leftValue.compareTo(rightValue);
+                }
+            };
+
     @Override
     public List<Item> buildTopFrequentList(Iterator<String> values, int size) {
         assert size >= 0 : "Size of the list must be >= 0";
@@ -22,6 +47,34 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         final List<DistributionItem> topFrequentDistributionItems =
                 findTopFrequentDistributionItems(valueDistribution, size);
         return buildResult(topFrequentDistributionItems);
+    }
+
+    private static class DistributionItem implements Item {
+
+        private final String value;
+        private int frequency;
+
+        public DistributionItem(String value) {
+            this.value = value;
+            this.frequency = 0;
+        }
+
+        @Override
+        public String value() {
+            return value;
+        }
+
+        @Override
+        public int frequency() {
+            return frequency;
+        }
+
+        /**
+         * Increments stored frequency.
+         */
+        public void incFrequency() {
+            ++frequency;
+        }
     }
 
     /**
@@ -54,29 +107,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
     private List<DistributionItem> findTopFrequentDistributionItems(List<DistributionItem> distribution, int count) {
         //todo: This implementation is rather naive and may be much better.
         //todo: JCF, Guava, Apache Commons or another ready solution needs to be searched for.
-        Collections.sort(distribution, new Comparator<DistributionItem>() {
-            @Override
-            public int compare(DistributionItem left, DistributionItem right) {
-                final int leftFrequency = left.frequency();
-                final int rightFrequency = right.frequency();
-                if (leftFrequency > rightFrequency) {
-                    return -1;
-                }
-                if (leftFrequency < rightFrequency) {
-                    return 1;
-                }
-                // If frequencies are equal than compare values to make results of algorithm predictable
-                final String leftValue = left.value();
-                final String rightValue = right.value();
-                if (leftValue == null) {
-                    if (rightValue == null) {
-                        return 0;
-                    }
-                    return 1;
-                }
-                return leftValue.compareTo(rightValue);
-            }
-        });
+        Collections.sort(distribution, DISTRIBUTION_ITEM_COMPARATOR);
         final int uniqueValueCount = distribution.size();
         final int topFrequentListSize = Math.min(uniqueValueCount, count);
         return distribution.subList(0, topFrequentListSize);
@@ -94,33 +125,5 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
             result.add(distributionItem);
         }
         return result;
-    }
-
-    private static class DistributionItem implements Item {
-
-        private final String value;
-        private int frequency;
-
-        public DistributionItem(String value) {
-            this.value = value;
-            this.frequency = 0;
-        }
-
-        @Override
-        public String value() {
-            return value;
-        }
-
-        @Override
-        public int frequency() {
-            return frequency;
-        }
-
-        /**
-         * Increments stored frequency.
-         */
-        public void incFrequency() {
-            ++frequency;
-        }
     }
 }

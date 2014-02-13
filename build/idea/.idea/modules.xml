@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/tcp_proxy.iml" filepath="$PROJECT_DIR$/tcp_proxy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/tcp_proxy.iml" filepath="$PROJECT_DIR$/.idea/tcp_proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/top_builder.iml" filepath="$PROJECT_DIR$/top_builder.iml" />
     </modules>
   </component>

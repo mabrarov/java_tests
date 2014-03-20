@@ -29,11 +29,14 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
                     // If frequencies are equal then compare values to make results of algorithm predictable
                     final String leftValue = left.value();
                     final String rightValue = right.value();
+                    if (leftValue == rightValue) {
+                        return 0;
+                    }
                     if (leftValue == null) {
-                        if (rightValue == null) {
-                            return 0;
-                        }
                         return 1;
+                    }
+                    if (rightValue == null) {
+                        return -1;
                     }
                     return leftValue.compareTo(rightValue);
                 }

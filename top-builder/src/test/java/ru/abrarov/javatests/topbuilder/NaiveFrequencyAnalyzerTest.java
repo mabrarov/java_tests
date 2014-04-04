@@ -1,16 +1,14 @@
 package ru.abrarov.javatests.topbuilder;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.TestName;
+
+import java.util.*;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * NaiveFrequencyAnalyzer test.
@@ -22,6 +20,19 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	public TestName testName = new TestName();
 
+    private FrequencyAnalyzer frequencyAnalyzer;
+
+    @Before
+    public void init() {
+        printTestHeader();
+        frequencyAnalyzer = new NaiveFrequencyAnalyzer();
+    }
+
+    @After
+    public void shutdown() {
+        frequencyAnalyzer = null;
+    }
+
 	/**
 	 * Test set contains values with no equal frequency.
 	 * 
@@ -30,9 +41,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testValuesWithDifferentFrequencies() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithDifferentFrequencies();
 		final int listSize = 3;
 		printSourceDataAndTestParams(values, listSize);
@@ -55,9 +63,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testValuesWithSomeEqualFrequencies() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithSomeEqualFrequencies();
 		final int listSize = 3;
 		printSourceDataAndTestParams(values, listSize);
@@ -80,9 +85,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testValuesWithFewUniqueValues() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithFewUniqueValues();
 		final int listSize = values.size() * 2;
 		printSourceDataAndTestParams(values, listSize);
@@ -105,9 +107,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testValuesWithNulls() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithNulls();
 		final int listSize = 3;
 		printSourceDataAndTestParams(values, listSize);
@@ -127,9 +126,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testNoValues() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = Collections.emptyList();
 		final int listSize = 3;
 		printSourceDataAndTestParams(values, listSize);
@@ -150,9 +146,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testZeroListSize() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithSomeEqualFrequencies();
 		final int listSize = 0;
 		printSourceDataAndTestParams(values, listSize);
@@ -173,9 +166,6 @@ public class NaiveFrequencyAnalyzerTest {
 	 */
 	@Test
 	public void testInvalidListSize() {
-		printTestHeader();
-		final FrequencyAnalyzer frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-
 		final List<String> values = buildSourceDataWithSomeEqualFrequencies();
 		final int listSize = -3;
 		printSourceDataAndTestParams(values, listSize);

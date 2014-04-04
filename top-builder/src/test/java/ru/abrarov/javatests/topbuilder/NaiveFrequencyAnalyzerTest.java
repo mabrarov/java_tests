@@ -1,8 +1,8 @@
 package ru.abrarov.javatests.topbuilder;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
@@ -21,6 +21,7 @@ public class NaiveFrequencyAnalyzerTest {
     /**
      * Name of current running test
      */
+    @Rule
     public TestName testName = new TestName();
 
     /**
@@ -170,7 +171,7 @@ public class NaiveFrequencyAnalyzerTest {
     /**
      * Test invalid arguments.
      */
-    @Test
+    @Test(expected = AssertionError.class)
     public void testInvalidListSize() {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = -3;
@@ -184,10 +185,9 @@ public class NaiveFrequencyAnalyzerTest {
                     values.iterator(), listSize);
         } catch (AssertionError e) {
             printActualResult(e);
-            return;
+            throw e;
         }
         printActualResult(actualResult);
-        Assert.fail("Actual test result differs from expected test result");
     }
 
     private static void assertEquals(

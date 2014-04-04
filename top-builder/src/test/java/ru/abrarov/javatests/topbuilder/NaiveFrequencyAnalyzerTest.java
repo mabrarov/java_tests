@@ -12,6 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * NaiveFrequencyAnalyzer test.
+ *
+ * @see FrequencyAnalyzer
+ * @see NaiveFrequencyAnalyzer
  */
 public class NaiveFrequencyAnalyzerTest {
 
@@ -20,6 +23,9 @@ public class NaiveFrequencyAnalyzerTest {
      */
     public TestName testName = new TestName();
 
+    /**
+     * Instance of {@link NaiveFrequencyAnalyzer} to be tested.
+     */
     private FrequencyAnalyzer frequencyAnalyzer;
 
     @Before

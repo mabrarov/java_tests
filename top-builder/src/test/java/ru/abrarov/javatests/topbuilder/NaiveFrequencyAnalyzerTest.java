@@ -1,6 +1,5 @@
 package ru.abrarov.javatests.topbuilder;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,11 +32,6 @@ public class NaiveFrequencyAnalyzerTest {
     public void init() {
         printTestHeader();
         frequencyAnalyzer = new NaiveFrequencyAnalyzer();
-    }
-
-    @After
-    public void shutdown() {
-        frequencyAnalyzer = null;
     }
 
     /**

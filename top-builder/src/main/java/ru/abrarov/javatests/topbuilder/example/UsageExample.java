@@ -27,9 +27,8 @@ public class UsageExample {
         final FrequencyAnalyzer frequencyAnalyzer = buildFrequencyAnalyzer(parameters);
         printStartNotification();
         final long startTime = System.currentTimeMillis();
-        final List<FrequencyAnalyzer.Item> top = frequencyAnalyzer
-                .buildTopFrequentList(sourceValues.iterator(),
-                        parameters.topListSize);
+        final List<FrequencyAnalyzer.Item> top =
+                frequencyAnalyzer.buildTopFrequentList(sourceValues.iterator(), parameters.topListSize);
         final long durationInMillis = System.currentTimeMillis() - startTime;
         printStopNotification();
         printTestDuration(durationInMillis);
@@ -62,14 +61,11 @@ public class UsageExample {
         public final boolean showSourceData;
 
         /**
-         * Parses commandline parameters and builds app parameters according to
-         * the parsed data.
+         * Parses commandline parameters and builds app parameters according to the parsed data.
          *
-         * @param args Commandline parameters to be parsed and used for building
-         *             app parameters: &lt;unique value number&gt; &lt;total
-         *             value number&gt; &lt;top list size&gt; &lt;min value
-         *             length&gt; &lt;max value length&gt; &lt;show source data
-         *             flag&gt;
+         * @param args Commandline parameters to be parsed and used for building app parameters: &lt;unique value
+         *             number&gt; &lt;total value number&gt; &lt;top list size&gt; &lt;min value length&gt; &lt;max
+         *             value length&gt; &lt;show source data flag&gt;
          */
         private Parameters(String[] args) {
             this.uniqueValueCount = parseIntArg(args, 0, 100);
@@ -85,13 +81,10 @@ public class UsageExample {
          *
          * @param args         Commandline parameters.
          * @param index        Index of the commandline parameter to be parsed.
-         * @param defaultValue Default value returned when the commandline parameter
-         *                     wasn't found.
-         * @return Parsed value or the default one if the commandline parameter
-         *         wasn't found.
+         * @param defaultValue Default value returned when the commandline parameter wasn't found.
+         * @return Parsed value or the default one if the commandline parameter wasn't found.
          */
-        private static int parseIntArg(String[] args, int index,
-                                       int defaultValue) {
+        private static int parseIntArg(String[] args, int index, int defaultValue) {
             if (args.length > index) {
                 return Integer.parseInt(args[index]);
             }
@@ -105,8 +98,7 @@ public class UsageExample {
      * @param values Source data to be output.
      */
     private static void printSourceData(Collection<String> values) {
-        System.out.println(String.format("Values to analyze (total: %d)",
-                values.size()));
+        System.out.println(String.format("Values to analyze (total: %d)", values.size()));
         for (String value : values) {
             System.out.println(value);
         }
@@ -121,8 +113,7 @@ public class UsageExample {
     }
 
     private static void printTestDuration(long durationInMillis) {
-        System.out.println(String.format("Duration: %d.%03d sec",
-                durationInMillis / 1000, durationInMillis % 1000));
+        System.out.println(String.format("Duration: %d.%03d sec", durationInMillis / 1000, durationInMillis % 1000));
     }
 
     /**
@@ -130,27 +121,23 @@ public class UsageExample {
      *
      * @param topList The top list to be output.
      */
-    private static void printAnalyzedData(
-            Collection<FrequencyAnalyzer.Item> topList) {
-        System.out.println(String.format("Top %d most frequent values",
-                topList.size()));
+    private static void printAnalyzedData(Collection<FrequencyAnalyzer.Item> topList) {
+        System.out.println(String.format("Top %d most frequent values", topList.size()));
         for (FrequencyAnalyzer.Item item : topList) {
-            System.out.println(String.format("Frequency: %d. Value: %s",
-                    item.frequency(), item.value()));
+            System.out.println(String.format("Frequency: %d. Value: %s", item.frequency(), item.value()));
         }
     }
 
     /**
-     * Builds randomized collection of (random) strings according to the
-     * parameters of app.
+     * Builds randomized collection of (random) strings according to the parameters of app.
      *
      * @param parameters App parameters.
      * @return Randomized collection of random strings.
      */
     private static Collection<String> buildRandomValues(Parameters parameters) {
-        return new RandomSourceDataProvider().buildRandomValues(
-                parameters.minValueLength, parameters.maxValueLength,
-                parameters.uniqueValueCount, parameters.totalValueCount);
+        return new RandomSourceDataProvider()
+                .buildRandomValues(parameters.minValueLength, parameters.maxValueLength, parameters.uniqueValueCount,
+                        parameters.totalValueCount);
     }
 
     /**
@@ -159,8 +146,7 @@ public class UsageExample {
      * @param parameters App parameters.
      * @return Built analyzer implementation.
      */
-    private static FrequencyAnalyzer buildFrequencyAnalyzer(
-            Parameters parameters) {
+    private static FrequencyAnalyzer buildFrequencyAnalyzer(Parameters parameters) {
         // todo: select implementation of FrequencyAnalyzer according to
         // parameters
         return new NaiveFrequencyAnalyzer();

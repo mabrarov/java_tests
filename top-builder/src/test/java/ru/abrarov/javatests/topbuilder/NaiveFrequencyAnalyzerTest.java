@@ -44,16 +44,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testValuesWithDifferentFrequencies() {
         final List<String> values = buildSourceDataWithDifferentFrequencies();
         final int listSize = 3;
-        printSourceDataAndTestParams(values, listSize);
-
         final List<FrequencyAnalyzer.Item> expectedResult = buildExpectedResultForSourceDataWithDifferentFrequencies();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -66,16 +58,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testValuesWithSomeEqualFrequencies() {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = 3;
-        printSourceDataAndTestParams(values, listSize);
-
         final List<FrequencyAnalyzer.Item> expectedResult = buildExpectedResultForSourceDataWithSomeEqualFrequencies();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -88,16 +72,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testValuesWithFewUniqueValues() {
         final List<String> values = buildSourceDataWithFewUniqueValues();
         final int listSize = values.size() * 2;
-        printSourceDataAndTestParams(values, listSize);
-
         final List<FrequencyAnalyzer.Item> expectedResult = buildExpectedResultForSourceDataWithFewUniqueValues();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -110,16 +86,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testValuesWithNulls() {
         final List<String> values = buildSourceDataWithNulls();
         final int listSize = 3;
-        printSourceDataAndTestParams(values, listSize);
-
         final List<FrequencyAnalyzer.Item> expectedResult = buildExpectedResultForSourceDataWithNulls();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -129,17 +97,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testNoValues() {
         final List<String> values = Collections.emptyList();
         final int listSize = 3;
-        printSourceDataAndTestParams(values, listSize);
-
-        final List<FrequencyAnalyzer.Item> expectedResult = Collections
-                .emptyList();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        final List<FrequencyAnalyzer.Item> expectedResult = Collections.emptyList();
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -149,17 +108,8 @@ public class NaiveFrequencyAnalyzerTest {
     public void testZeroListSize() {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = 0;
-        printSourceDataAndTestParams(values, listSize);
-
-        final List<FrequencyAnalyzer.Item> expectedResult = Collections
-                .emptyList();
-        printExpectedResult(expectedResult);
-
-        final List<FrequencyAnalyzer.Item> actualResult = frequencyAnalyzer
-                .buildTopFrequentList(values.iterator(), listSize);
-        printActualResult(actualResult);
-
-        assertEquals(expectedResult, actualResult);
+        final List<FrequencyAnalyzer.Item> expectedResult = Collections.emptyList();
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
     /**
@@ -170,13 +120,10 @@ public class NaiveFrequencyAnalyzerTest {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = -3;
         printSourceDataAndTestParams(values, listSize);
-
         System.out.println("Expected result: java.lang.AssertionError");
-
         final List<FrequencyAnalyzer.Item> actualResult;
         try {
-            actualResult = frequencyAnalyzer.buildTopFrequentList(
-                    values.iterator(), listSize);
+            actualResult = frequencyAnalyzer.buildTopFrequentList(values.iterator(), listSize);
         } catch (AssertionError e) {
             printActualResult(e);
             throw e;
@@ -184,33 +131,24 @@ public class NaiveFrequencyAnalyzerTest {
         printActualResult(actualResult);
     }
 
-    private static void assertEquals(
-            List<FrequencyAnalyzer.Item> expectedResult,
+    private void testActualToBeEqualToExpected(List<String> values, int listSize,
+            List<FrequencyAnalyzer.Item> expectedResult) {
+        printSourceDataAndTestParams(values, listSize);
+        printExpectedResult(expectedResult);
+
+        final List<FrequencyAnalyzer.Item> actualResult =
+                frequencyAnalyzer.buildTopFrequentList(values.iterator(), listSize);
+        printActualResult(actualResult);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    private static void assertEquals(List<FrequencyAnalyzer.Item> expectedResult,
             List<FrequencyAnalyzer.Item> actualResult) {
-        assertTrue("Actual test result differs from expected test result",
-                equals(expectedResult, actualResult));
+        assertTrue("Actual test result differs from expected test result", equals(expectedResult, actualResult));
     }
 
-    private static String resultItemToString(FrequencyAnalyzer.Item item) {
-        return String.format("Frequency: %d. Value: %s", item.frequency(),
-                item.value());
-    }
-
-    private static boolean equals(FrequencyAnalyzer.Item left,
-                                  FrequencyAnalyzer.Item right) {
-        if (left.frequency() != right.frequency()) {
-            return false;
-        }
-        final String leftValue = left.value();
-        final String rightValue = right.value();
-        if (leftValue == null) {
-            return rightValue == null;
-        }
-        return leftValue.equals(rightValue);
-    }
-
-    private static boolean equals(List<FrequencyAnalyzer.Item> left,
-                                  List<FrequencyAnalyzer.Item> right) {
+    private static boolean equals(List<FrequencyAnalyzer.Item> left, List<FrequencyAnalyzer.Item> right) {
         if (right.size() != left.size()) {
             return false;
         }
@@ -224,6 +162,22 @@ public class NaiveFrequencyAnalyzerTest {
         return true;
     }
 
+    private static boolean equals(FrequencyAnalyzer.Item left, FrequencyAnalyzer.Item right) {
+        if (left.frequency() != right.frequency()) {
+            return false;
+        }
+        final String leftValue = left.value();
+        final String rightValue = right.value();
+        if (leftValue == null) {
+            return rightValue == null;
+        }
+        return leftValue.equals(rightValue);
+    }
+
+    private static String resultItemToString(FrequencyAnalyzer.Item item) {
+        return String.format("Frequency: %d. Value: %s", item.frequency(), item.value());
+    }
+
     private static String sourceDataToString(List<String> values) {
         return listToString(values, new StringSerializer<String>() {
             @Override
@@ -234,26 +188,23 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     private static String resultToString(List<FrequencyAnalyzer.Item> items) {
-        return listToString(items,
-                new StringSerializer<FrequencyAnalyzer.Item>() {
+        return listToString(items, new StringSerializer<FrequencyAnalyzer.Item>() {
                     @Override
                     public String serializeToString(FrequencyAnalyzer.Item value) {
                         return resultItemToString(value);
                     }
-                });
+                }
+        );
     }
 
-    private static <T> String listToString(Collection<T> values,
-                                           StringSerializer<T> stringSerializer) {
+    private static <T> String listToString(Collection<T> values, StringSerializer<T> stringSerializer) {
         boolean first = true;
-        final StringBuilder stringBuilder = new StringBuilder(
-                values.size() * 40);
+        final StringBuilder stringBuilder = new StringBuilder(values.size() * 40);
         for (T value : values) {
             if (!first) {
                 stringBuilder.append("; ");
             }
-            stringBuilder.append(String.format("{%s}",
-                    stringSerializer.serializeToString(value)));
+            stringBuilder.append(String.format("{%s}", stringSerializer.serializeToString(value)));
             first = false;
         }
         return stringBuilder.toString();
@@ -264,23 +215,19 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     private void printTestHeader() {
-        System.out.println(String.format("--- %s#%s ---", getClass()
-                .getSimpleName(), testName.getMethodName()));
+        System.out.println(String.format("--- %s#%s ---", getClass().getSimpleName(), testName.getMethodName()));
     }
 
     private void printExpectedResult(List<FrequencyAnalyzer.Item> expectedResult) {
-        System.out.println(String.format("Expected result: %s",
-                resultToString(expectedResult)));
+        System.out.println(String.format("Expected result: %s", resultToString(expectedResult)));
     }
 
     private void printActualResult(List<FrequencyAnalyzer.Item> actualResult) {
-        System.out.println(String.format("Actual result  : %s",
-                resultToString(actualResult)));
+        System.out.println(String.format("Actual result  : %s", resultToString(actualResult)));
     }
 
     private void printSourceDataAndTestParams(List<String> values, int listSize) {
-        System.out.println(String.format("Source data    : %s",
-                sourceDataToString(values)));
+        System.out.println(String.format("Source data    : %s", sourceDataToString(values)));
         System.out.println(String.format("Top list size  : %d", listSize));
     }
 
@@ -292,14 +239,12 @@ public class NaiveFrequencyAnalyzerTest {
      * @see #testValuesWithDifferentFrequencies
      */
     private List<String> buildSourceDataWithDifferentFrequencies() {
-        return Arrays.asList("One", "Two", "Three", "Four", "Five", "Six",
-                "Seven", "Eight", "Nine", "Ten", "Two", "Three", "Four",
-                "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Three",
-                "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Four",
-                "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Five", "Six",
-                "Seven", "Eight", "Nine", "Ten", "Six", "Seven", "Eight",
-                "Nine", "Ten", "Seven", "Eight", "Nine", "Ten", "Eight",
-                "Nine", "Ten", "Nine", "Ten", "Ten");
+        return Arrays
+                .asList("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Two", "Three",
+                        "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Three", "Four", "Five", "Six", "Seven",
+                        "Eight", "Nine", "Ten", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Five", "Six",
+                        "Seven", "Eight", "Nine", "Ten", "Six", "Seven", "Eight", "Nine", "Ten", "Seven", "Eight",
+                        "Nine", "Ten", "Eight", "Nine", "Ten", "Nine", "Ten", "Ten");
     }
 
     /**
@@ -311,8 +256,8 @@ public class NaiveFrequencyAnalyzerTest {
      */
     private List<String> buildSourceDataWithSomeEqualFrequencies() {
         return Arrays
-                .asList("One", "Two", "Three", "Four", "Five", "Six", "Seven",
-                        "Eight", "Nine", "Ten", "Two", "Two", "Three", "Three");
+                .asList("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Two", "Two",
+                        "Three", "Three");
     }
 
     /**
@@ -334,16 +279,13 @@ public class NaiveFrequencyAnalyzerTest {
      * @see #testValuesWithNulls
      */
     private List<String> buildSourceDataWithNulls() {
-        return Arrays.asList("Adam", "Eve", null, "Apple", "Eve", "Apple",
-                "Apple", null);
+        return Arrays.asList("Adam", "Eve", null, "Apple", "Eve", "Apple", "Apple", null);
     }
 
     /**
-     * Build expected result (with size of 3) for the test set built with
-     * buildSourceDataWithDifferentFrequencies
+     * Build expected result (with size of 3) for the test set built with buildSourceDataWithDifferentFrequencies
      *
-     * @return Expected result (with size of 3) for the test set built with
-     *         buildSourceDataWithDifferentFrequencies
+     * @return Expected result (with size of 3) for the test set built with buildSourceDataWithDifferentFrequencies
      * @see #buildSourceDataWithDifferentFrequencies
      * @see #testValuesWithDifferentFrequencies
      */

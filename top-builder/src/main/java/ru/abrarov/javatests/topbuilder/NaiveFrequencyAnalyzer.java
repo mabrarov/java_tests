@@ -3,45 +3,44 @@ package ru.abrarov.javatests.topbuilder;
 import java.util.*;
 
 /**
- * Naive implementation of the FrequencyAnalyzer. Uses {@link java.util.HashMap
- * java.util.HashMap} to build distribution of the analyzed values so the number
- * of unique values (among the analyzed ones) and their hashes distribution are
- * the most significant factors for memory consumption (the first of this
- * factors) and performance. Because of usage of java.util.HashMap and
- * {@link java.util.Collections#sort java.util.Collections.sort} the complexity
- * of {@link #buildTopFrequentList} is o(n * log(n)).
+ * Naive implementation of the FrequencyAnalyzer. Uses {@link java.util.HashMap java.util.HashMap} to build distribution
+ * of the analyzed values so the number of unique values (among the analyzed ones) and their hashes distribution are the
+ * most significant factors for memory consumption (the first of this factors) and performance. Because of usage of
+ * java.util.HashMap and {@link java.util.Collections#sort java.util.Collections.sort} the complexity of {@link
+ * #buildTopFrequentList} is o(n * log(n)).
  *
  * @see FrequencyAnalyzer
  */
 public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
 
-    private static final Comparator<DistributionItem> DISTRIBUTION_ITEM_COMPARATOR = new Comparator<DistributionItem>() {
-        @Override
-        public int compare(DistributionItem left, DistributionItem right) {
-            final int leftFrequency = left.frequency();
-            final int rightFrequency = right.frequency();
-            if (leftFrequency > rightFrequency) {
-                return -1;
-            }
-            if (leftFrequency < rightFrequency) {
-                return 1;
-            }
-            // If frequencies are equal then compare values to make results of
-            // algorithm predictable
-            final String leftValue = left.value();
-            final String rightValue = right.value();
-            if (leftValue == rightValue) {
-                return 0;
-            }
-            if (leftValue == null) {
-                return 1;
-            }
-            if (rightValue == null) {
-                return -1;
-            }
-            return leftValue.compareTo(rightValue);
-        }
-    };
+    private static final Comparator<DistributionItem> DISTRIBUTION_ITEM_COMPARATOR =
+            new Comparator<DistributionItem>() {
+                @Override
+                public int compare(DistributionItem left, DistributionItem right) {
+                    final int leftFrequency = left.frequency();
+                    final int rightFrequency = right.frequency();
+                    if (leftFrequency > rightFrequency) {
+                        return -1;
+                    }
+                    if (leftFrequency < rightFrequency) {
+                        return 1;
+                    }
+                    // If frequencies are equal then compare values to make results of
+                    // algorithm predictable
+                    final String leftValue = left.value();
+                    final String rightValue = right.value();
+                    if (leftValue == rightValue) {
+                        return 0;
+                    }
+                    if (leftValue == null) {
+                        return 1;
+                    }
+                    if (rightValue == null) {
+                        return -1;
+                    }
+                    return leftValue.compareTo(rightValue);
+                }
+            };
 
     @Override
     public List<Item> buildTopFrequentList(Iterator<String> values, int size) {
@@ -50,10 +49,10 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (size == 0) {
             return Collections.emptyList();
         }
-        final List<DistributionItem> valueDistribution = new ArrayList<DistributionItem>(
-                buildDistributionMap(values).values());
-        final List<DistributionItem> topFrequentDistributionItems = findTopFrequentDistributionItems(
-                valueDistribution, size);
+        final List<DistributionItem> valueDistribution =
+                new ArrayList<DistributionItem>(buildDistributionMap(values).values());
+        final List<DistributionItem> topFrequentDistributionItems =
+                findTopFrequentDistributionItems(valueDistribution, size);
         return buildResult(topFrequentDistributionItems);
     }
 
@@ -91,8 +90,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @param values Values to be analyzed. Nulls are permitted.
      * @return Map of values distribution.
      */
-    private Map<String, DistributionItem> buildDistributionMap(
-            Iterator<String> values) {
+    private Map<String, DistributionItem> buildDistributionMap(Iterator<String> values) {
         final Map<String, DistributionItem> distribution = new HashMap<String, DistributionItem>();
         while (values.hasNext()) {
             final String value = values.next();
@@ -113,8 +111,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @param count        Maximum number of returned items.
      * @return List of items of the given distribution having max frequency.
      */
-    private List<DistributionItem> findTopFrequentDistributionItems(
-            List<DistributionItem> distribution, int count) {
+    private List<DistributionItem> findTopFrequentDistributionItems(List<DistributionItem> distribution, int count) {
         // todo: This implementation is rather naive and may be much better.
         // todo: JCF, Guava, Apache Commons or another ready solution needs to
         // be searched for.
@@ -127,12 +124,10 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
     /**
      * Builds list of Item from the given collection of DistributionItem
      *
-     * @param distributionItems The source List which contents will be copied to the built
-     *                          list of Item.
+     * @param distributionItems The source List which contents will be copied to the built list of Item.
      * @return Built list of Item.
      */
-    private List<Item> buildResult(
-            Collection<DistributionItem> distributionItems) {
+    private List<Item> buildResult(Collection<DistributionItem> distributionItems) {
         final List<Item> result = new ArrayList<Item>(distributionItems.size());
         for (DistributionItem distributionItem : distributionItems) {
             result.add(distributionItem);

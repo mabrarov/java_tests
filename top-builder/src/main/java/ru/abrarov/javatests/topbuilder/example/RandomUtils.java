@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Utilities for generation of random values. May be replaced with another ready
- * solution. Implemented here to make app depends only on JRE 1.5.
+ * Utilities for generation of random values. May be replaced with another ready solution. Implemented here to make app
+ * depends only on JRE 1.5.
  */
 public class RandomUtils {
 
@@ -33,8 +33,7 @@ public class RandomUtils {
      * @param alphabet Alphabet to be used in string generation. Must be not empty.
      * @param length   Length of the generated string. Must be >= 0.
      * @param random   Random generator to be used.
-     * @return String of desired length containing random characters of desired
-     *         alphabet.
+     * @return String of desired length containing random characters of desired alphabet.
      */
     public static String randomString(char[] alphabet, int length, Random random) {
         assert length >= 0 : "length must be >= 0";
@@ -52,18 +51,15 @@ public class RandomUtils {
     }
 
     /**
-     * Generates list containing random number of any value from the given
-     * collection.
+     * Generates list containing random number of any value from the given collection.
      *
      * @param values   Collection of values used to fill generated list.
      * @param listSize Size of the list to be generated.
      * @param random   Random generator to be used.
      * @param <T>      Value type.
-     * @return Generated list containing random number of any value from the
-     *         given collection.
+     * @return Generated list containing random number of any value from the given collection.
      */
-    public static <T> List<T> randomFilledList(List<T> values, int listSize,
-                                               Random random) {
+    public static <T> List<T> randomFilledList(List<T> values, int listSize, Random random) {
         assert !(values.isEmpty() && listSize > 0) : "listSize > 0 is not permitted for non empty values";
         assert !values.isEmpty() && listSize < 0 : "listSize <= 0 is permitted for empty values only";
 

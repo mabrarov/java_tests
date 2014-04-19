@@ -49,6 +49,22 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     /**
+     * Test set contains values with no equal frequency and the top size is very small so the minimum selection sort
+     * works.
+     *
+     * @see #buildSourceDataWithDifferentFrequencies
+     * @see #buildExpectedResultForSourceDataWithDifferentFrequencies
+     */
+    @Test
+    public void testValuesWithDifferentFrequenciesAndSmallTopSize() {
+        final List<String> values = buildSourceDataWithDifferentFrequencies();
+        final int listSize = 1;
+        final List<FrequencyAnalyzer.Item> expectedResult =
+                buildExpectedResultForSourceDataWithDifferentFrequencies().subList(0, listSize);
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
+    }
+
+    /**
      * Test set contains some values with equal frequency.
      *
      * @see #buildSourceDataWithSomeEqualFrequencies
@@ -59,6 +75,22 @@ public class NaiveFrequencyAnalyzerTest {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = 3;
         final List<FrequencyAnalyzer.Item> expectedResult = buildExpectedResultForSourceDataWithSomeEqualFrequencies();
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
+    }
+
+    /**
+     * Test set contains some values with equal frequency and the top size is very small so the minimum selection sort
+     * works.
+     *
+     * @see #buildSourceDataWithSomeEqualFrequencies
+     * @see #buildExpectedResultForSourceDataWithSomeEqualFrequencies
+     */
+    @Test
+    public void testValuesWithSomeEqualFrequenciesAndSmallTopSize() {
+        final List<String> values = buildSourceDataWithSomeEqualFrequencies();
+        final int listSize = 1;
+        final List<FrequencyAnalyzer.Item> expectedResult =
+                buildExpectedResultForSourceDataWithSomeEqualFrequencies().subList(0, listSize);
         testActualToBeEqualToExpected(values, listSize, expectedResult);
     }
 
@@ -257,7 +289,10 @@ public class NaiveFrequencyAnalyzerTest {
     private List<String> buildSourceDataWithSomeEqualFrequencies() {
         return Arrays
                 .asList("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Two", "Two",
-                        "Three", "Three");
+                        "Three", "Three", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                        "Two", "Two", "Three", "Three", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+                        "Nine", "Ten", "Two", "Two", "Three", "Three", "One", "Two", "Three", "Four", "Five", "Six",
+                        "Seven", "Eight", "Nine", "Ten", "Two", "Two", "Three", "Three");
     }
 
     /**
@@ -333,7 +368,7 @@ public class NaiveFrequencyAnalyzerTest {
 
                                  @Override
                                  public int frequency() {
-                                     return 3;
+                                     return 12;
                                  }
                              }, new FrequencyAnalyzer.Item() {
                                  @Override
@@ -343,7 +378,7 @@ public class NaiveFrequencyAnalyzerTest {
 
                                  @Override
                                  public int frequency() {
-                                     return 3;
+                                     return 12;
                                  }
                              }, new FrequencyAnalyzer.Item() {
                                  @Override
@@ -353,7 +388,7 @@ public class NaiveFrequencyAnalyzerTest {
 
                                  @Override
                                  public int frequency() {
-                                     return 1;
+                                     return 4;
                                  }
                              }
         );
@@ -408,7 +443,7 @@ public class NaiveFrequencyAnalyzerTest {
                              }, new FrequencyAnalyzer.Item() {
                                  @Override
                                  public String value() {
-                                     return "Eve";
+                                     return null;
                                  }
 
                                  @Override
@@ -418,7 +453,7 @@ public class NaiveFrequencyAnalyzerTest {
                              }, new FrequencyAnalyzer.Item() {
                                  @Override
                                  public String value() {
-                                     return null;
+                                     return "Eve";
                                  }
 
                                  @Override

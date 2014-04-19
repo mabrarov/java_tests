@@ -33,10 +33,10 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
                         return 0;
                     }
                     if (leftValue == null) {
-                        return 1;
+                        return -1;
                     }
                     if (rightValue == null) {
-                        return -1;
+                        return 1;
                     }
                     return leftValue.compareTo(rightValue);
                 }
@@ -112,13 +112,29 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @return List of items of the given distribution having max frequency.
      */
     private List<DistributionItem> findTopFrequentDistributionItems(List<DistributionItem> distribution, int count) {
+        final int topFrequentListSize = Math.min(distribution.size(), count);
+        partialSort(distribution, topFrequentListSize, DISTRIBUTION_ITEM_COMPARATOR);
+        return distribution.subList(0, topFrequentListSize);
+    }
+
+    /**
+     * Partial sort of most small items.
+     *
+     * @param list       List to be sorted.
+     * @param count      Number of most small items to be sorted.
+     * @param comparator The comparator to determine the order of the list.
+     */
+    private static <T> void partialSort(List<T> list, int count, Comparator<? super T> comparator) {
         // todo: This implementation is rather naive and may be much better.
         // todo: JCF, Guava, Apache Commons or another ready solution needs to
         // be searched for.
-        Collections.sort(distribution, DISTRIBUTION_ITEM_COMPARATOR);
-        final int uniqueValueCount = distribution.size();
-        final int topFrequentListSize = Math.min(uniqueValueCount, count);
-        return distribution.subList(0, topFrequentListSize);
+        final int size = list.size();
+        assert count >= 0 && count <= size : "Number of sorted items should be >= 0 and <= size of list";
+
+        if (size < 2 || count < 1) {
+            return;
+        }
+        Collections.sort(list, comparator);
     }
 
     /**
@@ -134,4 +150,5 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         }
         return result;
     }
+
 }

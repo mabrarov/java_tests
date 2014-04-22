@@ -109,6 +109,21 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     /**
+     * Test set is smaller than the specified list size.
+     *
+     * @see #buildSourceDataWithDifferentFrequencies
+     * @see #buildFullySortedExpectedResultForSourceDataWithDifferentFrequencies
+     */
+    @Test
+    public void testWithFewTotalValues() {
+        final List<String> values = buildSourceDataWithDifferentFrequencies();
+        final int listSize = values.size() + 10;
+        final List<FrequencyAnalyzer.Item> expectedResult =
+                buildFullySortedExpectedResultForSourceDataWithDifferentFrequencies();
+        testActualToBeEqualToExpected(values, listSize, expectedResult);
+    }
+
+    /**
      * Test set contains nulls.
      *
      * @see #buildSourceDataWithNulls
@@ -354,6 +369,118 @@ public class NaiveFrequencyAnalyzerTest {
                                  @Override
                                  public int frequency() {
                                      return 8;
+                                 }
+                             }
+        );
+    }
+
+    /**
+     * Builds fully sorted expected result for the test set built with buildSourceDataWithDifferentFrequencies
+     *
+     * @return Expected fully sorted result (with size of 10) for the test set built with
+     * buildSourceDataWithDifferentFrequencies
+     * @see #buildSourceDataWithDifferentFrequencies
+     */
+    private List<FrequencyAnalyzer.Item> buildFullySortedExpectedResultForSourceDataWithDifferentFrequencies() {
+        return Arrays.asList(new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Ten";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 10;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Nine";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 9;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Eight";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 8;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Seven";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 7;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Six";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 6;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Five";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 5;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Four";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 4;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Three";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 3;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "Two";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 2;
+                                 }
+                             }, new FrequencyAnalyzer.Item() {
+                                 @Override
+                                 public String value() {
+                                     return "One";
+                                 }
+
+                                 @Override
+                                 public int frequency() {
+                                     return 1;
                                  }
                              }
         );

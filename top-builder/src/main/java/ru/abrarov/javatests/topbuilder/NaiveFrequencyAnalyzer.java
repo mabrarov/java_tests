@@ -113,28 +113,34 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      */
     private List<DistributionItem> findTopFrequentDistributionItems(List<DistributionItem> distribution, int count) {
         final int topFrequentListSize = Math.min(distribution.size(), count);
-        partialSort(distribution, topFrequentListSize, DISTRIBUTION_ITEM_COMPARATOR);
-        return distribution.subList(0, topFrequentListSize);
+        return partialSorted(distribution, topFrequentListSize, DISTRIBUTION_ITEM_COMPARATOR);
     }
 
     /**
-     * Partial sort of most small items.
+     * Builds a list consisting of first items of the sorted original list.
      *
-     * @param list       List to be sorted.
-     * @param count      Number of most small items to be sorted.
+     * @param list       List to sort. Isn't modified.
+     * @param count      Number of items to be returned in a built list.
      * @param comparator The comparator to determine the order of the list.
+     * @return List consisting of first items of the sorted original list.
      */
-    private static <T> void partialSort(List<T> list, int count, Comparator<? super T> comparator) {
-        // todo: This implementation is rather naive and may be much better.
-        // todo: JCF, Guava, Apache Commons or another ready solution needs to
-        // be searched for.
-        final int size = list.size();
-        assert count >= 0 && count <= size : "Number of sorted items should be >= 0 and <= size of list";
+    private static <T> List<T> partialSorted(List<T> list, int count, Comparator<? super T> comparator) {
+        assert count >= 0 : "Number of sorted items should be >= 0";
 
-        if (size < 2 || count < 1) {
-            return;
+        if (count < 1) {
+            return Collections.emptyList();
         }
-        Collections.sort(list, comparator);
+        if (count == 1) {
+            return Collections.singletonList(Collections.min(list, comparator));
+        }
+        final NavigableSet<T> set = new TreeSet<T>(comparator);
+        for (T t : list) {
+            set.add(t);
+            if (set.size() > count) {
+                set.pollLast();
+            }
+        }
+        return new ArrayList<T>(set);
     }
 
     /**

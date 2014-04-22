@@ -133,6 +133,11 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (count == 1) {
             return Collections.singletonList(Collections.min(list, comparator));
         }
+        if (list.size() <= count) {
+            final List<T> temp = new ArrayList<T>(list);
+            Collections.sort(temp, comparator);
+            return temp;
+        }
         final NavigableSet<T> set = new TreeSet<T>(comparator);
         for (T t : list) {
             set.add(t);

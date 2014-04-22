@@ -58,12 +58,10 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
 
     private static class DistributionItem implements Item {
 
-        private final String value;
+        private String value;
         private int frequency;
 
-        public DistributionItem(String value) {
-            this.value = value;
-            this.frequency = 0;
+        private DistributionItem() {
         }
 
         @Override
@@ -77,10 +75,17 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         }
 
         /**
-         * Increments stored frequency.
+         * Assigns value to the item.
          */
-        public void incFrequency() {
-            ++frequency;
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        /**
+         * Assigns stored frequency.
+         */
+        public void setFrequency(int frequency) {
+            this.frequency = frequency;
         }
     }
 
@@ -92,14 +97,18 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      */
     private Map<String, DistributionItem> buildDistributionMap(Iterator<String> values) {
         final Map<String, DistributionItem> distribution = new HashMap<String, DistributionItem>();
+        DistributionItem freeItem = new DistributionItem();
         while (values.hasNext()) {
             final String value = values.next();
-            DistributionItem distributionItem = distribution.get(value);
-            if (distributionItem == null) {
-                distributionItem = new DistributionItem(value);
-                distribution.put(value, distributionItem);
+            freeItem.setValue(value);
+            final DistributionItem existingItem = distribution.put(value, freeItem);
+            if (existingItem == null) {
+                freeItem.setFrequency(1);
+                freeItem = new DistributionItem();
+            } else {
+                freeItem.setFrequency(existingItem.frequency() + 1);
+                freeItem = existingItem;
             }
-            distributionItem.incFrequency();
         }
         return distribution;
     }

@@ -36,6 +36,9 @@ public class RandomSourceDataProvider {
         assert minValueLength <= maxValueLength : "minValueLength must be <= maxValueLength";
 
         final List<String> uniqueValues = buildUniqueValues(minValueLength, maxValueLength, uniqueValueCount);
+        if (uniqueValueCount == totalValueCount) {
+            return uniqueValues;
+        }
         return RandomUtils.randomFilledList(uniqueValues, totalValueCount, random);
     }
 

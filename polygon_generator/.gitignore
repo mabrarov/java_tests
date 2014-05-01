@@ -1,0 +1,9 @@
+# Visual Studio project output folders.
+/build/msvc-11.0/out
+/build/msvc-11.0/projects/out
+
+# Visual Studio project temp files.
+/build/msvc-11.0/*.sdf
+/build/msvc-11.0/*.suo
+/build/msvc-11.0/*.opensdf
+/build/msvc-11.0/projects/*.vcxproj.user

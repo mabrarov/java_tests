@@ -13,34 +13,33 @@ import java.util.*;
  */
 public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
 
-    private static final Comparator<DistributionItem> DISTRIBUTION_ITEM_COMPARATOR =
-            new Comparator<DistributionItem>() {
-                @Override
-                public int compare(DistributionItem left, DistributionItem right) {
-                    final int leftFrequency = left.frequency();
-                    final int rightFrequency = right.frequency();
-                    if (leftFrequency > rightFrequency) {
-                        return -1;
-                    }
-                    if (leftFrequency < rightFrequency) {
-                        return 1;
-                    }
-                    // If frequencies are equal then compare values to make results of
-                    // algorithm predictable
-                    final String leftValue = left.value();
-                    final String rightValue = right.value();
-                    if (leftValue == rightValue) {
-                        return 0;
-                    }
-                    if (leftValue == null) {
-                        return -1;
-                    }
-                    if (rightValue == null) {
-                        return 1;
-                    }
-                    return leftValue.compareTo(rightValue);
-                }
-            };
+    private static final Comparator<Item> DISTRIBUTION_ITEM_COMPARATOR = new Comparator<Item>() {
+        @Override
+        public int compare(Item left, Item right) {
+            final int leftFrequency = left.frequency();
+            final int rightFrequency = right.frequency();
+            if (leftFrequency > rightFrequency) {
+                return -1;
+            }
+            if (leftFrequency < rightFrequency) {
+                return 1;
+            }
+            // If frequencies are equal then compare values to make results of
+            // algorithm predictable
+            final String leftValue = left.value();
+            final String rightValue = right.value();
+            if (leftValue == rightValue) {
+                return 0;
+            }
+            if (leftValue == null) {
+                return -1;
+            }
+            if (rightValue == null) {
+                return 1;
+            }
+            return leftValue.compareTo(rightValue);
+        }
+    };
 
     @Override
     public List<Item> buildTopFrequentList(Iterator<String> values, int size) {
@@ -49,11 +48,8 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (size == 0) {
             return Collections.emptyList();
         }
-        final List<DistributionItem> valueDistribution =
-                new ArrayList<DistributionItem>(buildDistributionMap(values).values());
-        final List<DistributionItem> topFrequentDistributionItems =
-                findTopFrequentDistributionItems(valueDistribution, size);
-        return buildResult(topFrequentDistributionItems);
+        final List<Item> valueDistribution = new ArrayList<Item>(buildDistributionMap(values).values());
+        return findTopFrequentDistributionItems(valueDistribution, size);
     }
 
     private static class DistributionItem implements Item {
@@ -90,11 +86,11 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @param values Values to be analyzed. Nulls are permitted.
      * @return Map of values distribution.
      */
-    private Map<String, DistributionItem> buildDistributionMap(Iterator<String> values) {
-        final Map<String, DistributionItem> distribution = new HashMap<String, DistributionItem>();
+    private Map<String, Item> buildDistributionMap(Iterator<String> values) {
+        final Map<String, Item> distribution = new HashMap<String, Item>();
         while (values.hasNext()) {
             final String value = values.next();
-            DistributionItem distributionItem = distribution.get(value);
+            DistributionItem distributionItem = (DistributionItem) distribution.get(value);
             if (distributionItem == null) {
                 distributionItem = new DistributionItem(value);
                 distribution.put(value, distributionItem);
@@ -111,7 +107,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @param count        Maximum number of returned items.
      * @return List of items of the given distribution having max frequency.
      */
-    private List<DistributionItem> findTopFrequentDistributionItems(List<DistributionItem> distribution, int count) {
+    private List<Item> findTopFrequentDistributionItems(List<Item> distribution, int count) {
         final int topFrequentListSize = Math.min(distribution.size(), count);
         return partialSorted(distribution, topFrequentListSize, DISTRIBUTION_ITEM_COMPARATOR);
     }
@@ -133,10 +129,11 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (count == 1) {
             return Collections.singletonList(Collections.min(list, comparator));
         }
-        if (list.size() <= count) {
+        final int listSize = list.size();
+        if (listSize <= 100000) {
             final List<T> temp = new ArrayList<T>(list);
             Collections.sort(temp, comparator);
-            return temp;
+            return temp.subList(0, Math.min(listSize, count));
         }
         final NavigableSet<T> set = new TreeSet<T>(comparator);
         for (T t : list) {
@@ -146,20 +143,6 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
             }
         }
         return new ArrayList<T>(set);
-    }
-
-    /**
-     * Builds list of Item from the given collection of DistributionItem
-     *
-     * @param distributionItems The source List which contents will be copied to the built list of Item.
-     * @return Built list of Item.
-     */
-    private List<Item> buildResult(Collection<DistributionItem> distributionItems) {
-        final List<Item> result = new ArrayList<Item>(distributionItems.size());
-        for (DistributionItem distributionItem : distributionItems) {
-            result.add(distributionItem);
-        }
-        return result;
     }
 
 }

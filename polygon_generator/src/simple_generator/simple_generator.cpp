@@ -53,6 +53,37 @@ std::string to_string(const T& value)
   return stream.str();
 }
 
+typedef unsigned long long max_uint_t;
+
+void generate(max_uint_t line_count, const pattern& str_generator,
+              random_t& rnd, std::ostream& stream)
+{
+  // Generated & output data    
+  for (; line_count; --line_count) 
+  {      
+    stream << str_generator.next(rnd) << std::endl;
+  }
+}
+
+void generate(max_uint_t line_count, std::size_t unique_line_count,
+              const pattern& str_generator, random_t& rnd, 
+              std::ostream& stream)
+{
+  // Produce the random (almost) unique data
+  std::vector<std::string> unique_lines;
+  unique_lines.reserve(unique_line_count);
+  for (std::size_t i = 0; i != unique_line_count; ++i)
+  {
+    unique_lines.push_back(str_generator.next(rnd));
+  }       
+
+  // Lookup for random data & output
+  for (; line_count; --line_count) 
+  {      
+    stream << unique_lines[rnd.next(unique_line_count)] << std::endl;
+  }
+}
+
 } // anonymous namespace
 
 #if defined(WIN32)
@@ -61,10 +92,6 @@ int _tmain(int argc, _TCHAR* argv[])
 int main(int argc, char* argv[])
 #endif
 {
-  typedef unsigned long long            max_uint_t;
-  typedef std::vector<std::string>      string_vector;
-  typedef string_vector::const_iterator string_vector_iterator;
-
   try
   {        
     registerGen(argc, argv, 1);
@@ -83,20 +110,16 @@ int main(int argc, char* argv[])
     const std::string pattern_text = "[a-zA-Z0-9]{"
         + to_string(min_line_len) + "," 
         + to_string(max_line_len) + "}";
-    const pattern random_str_generator(pattern_text);
+    const pattern str_generator(pattern_text);
 
-    // Produce the random (almost) unique data
-    std::vector<std::string> unique_lines;
-    unique_lines.reserve(unique_line_count);
-    for (std::size_t i = 0; i != unique_line_count; ++i)
+    // Generate and output data
+    if (unique_line_count >= line_count)
     {
-      unique_lines.push_back(random_str_generator.next(rnd));
-    }       
-
-    // Produce generated data    
-    for (max_uint_t i = line_count; i; --i) 
-    {      
-      std::cout << unique_lines[rnd.next(unique_line_count)] << std::endl;
+      generate(line_count, str_generator, rnd, std::cout);
+    }
+    else 
+    {
+      generate(line_count, unique_line_count, str_generator, rnd, std::cout);
     }
     return EXIT_SUCCESS;
   }

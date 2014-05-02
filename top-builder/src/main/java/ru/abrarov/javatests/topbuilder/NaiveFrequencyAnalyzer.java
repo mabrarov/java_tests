@@ -48,8 +48,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (size == 0) {
             return Collections.emptyList();
         }
-        final List<Item> valueDistribution = new ArrayList<Item>(buildDistributionMap(values).values());
-        return findTopFrequentDistributionItems(valueDistribution, size);
+        return findTopFrequentItems(buildDistributionMap(values).values(), size);
     }
 
     private static class DistributionItem implements Item {
@@ -83,7 +82,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
     /**
      * Builds distribution map of the given values.
      *
-     * @param values Values to be analyzed. Nulls are permitted.
+     * @param values Values to be analyzed. Nulls as values of iterator are permitted.
      * @return Map of values distribution.
      */
     private Map<String, Item> buildDistributionMap(Iterator<String> values) {
@@ -107,32 +106,37 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      * @param count        Maximum number of returned items.
      * @return List of items of the given distribution having max frequency.
      */
-    private List<Item> findTopFrequentDistributionItems(List<Item> distribution, int count) {
-        final int topFrequentListSize = Math.min(distribution.size(), count);
-        return partialSorted(distribution, topFrequentListSize, DISTRIBUTION_ITEM_COMPARATOR);
+    private List<Item> findTopFrequentItems(Collection<Item> distribution, int count) {
+        return partialSorted(distribution, count, DISTRIBUTION_ITEM_COMPARATOR);
     }
 
     /**
-     * Builds a list consisting of first items of the sorted original list.
+     * Builds a list consisting of first items of the sorted original collection.
      *
-     * @param list       List to sort. Isn't modified.
-     * @param count      Number of items to be returned in a built list.
-     * @param comparator The comparator to determine the order of the list.
-     * @return List consisting of first items of the sorted original list.
+     * @param collection Collection to sort. Isn't modified.
+     * @param count      Number of items to be returned in a built collection. If greater than the size of collection
+     *                   then the last will be used.
+     * @param comparator The comparator to determine the order of the collection.
+     * @return List consisting of first items of the sorted original collection.
      */
-    private static <T> List<T> partialSorted(List<T> list, int count, Comparator<? super T> comparator) {
+    private static <T> List<T> partialSorted(Collection<T> collection, int count, Comparator<? super T> comparator) {
         assert count >= 0 : "Number of sorted items should be >= 0";
-        assert count <= list.size() : "Number of sorted items should be <= list.size()";
 
-        if (count < 1) {
+        // Some simple optimizations
+        if (count < 1 || collection.isEmpty()) {
             return Collections.emptyList();
         }
         if (count == 1) {
-            return Collections.singletonList(Collections.min(list, comparator));
+            return Collections.singletonList(Collections.min(collection, comparator));
+        }
+        if (collection.size() <= count) {
+            final List<T> temp = new ArrayList<T>(collection);
+            Collections.sort(temp, comparator);
+            return temp;
         }
         // Remove conditional branch from the cycle by splitting the only cycle into 2 cycles.
         final NavigableSet<T> set = new TreeSet<T>(comparator);
-        final Iterator<T> iterator = list.iterator();
+        final Iterator<T> iterator = collection.iterator();
         // The first cycle
         for (int i = 0; i < count && iterator.hasNext(); ++i) {
             set.add(iterator.next());

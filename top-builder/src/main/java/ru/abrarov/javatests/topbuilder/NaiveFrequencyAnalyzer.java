@@ -58,7 +58,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
 
         public DistributionItem(String value) {
             this.value = value;
-            this.frequency = 0;
+            this.frequency = 1;
         }
 
         @Override
@@ -89,12 +89,12 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         final Map<String, Item> distribution = new HashMap<String, Item>();
         while (values.hasNext()) {
             final String value = values.next();
-            DistributionItem distributionItem = (DistributionItem) distribution.get(value);
-            if (distributionItem == null) {
-                distributionItem = new DistributionItem(value);
-                distribution.put(value, distributionItem);
+            DistributionItem item = (DistributionItem) distribution.get(value);
+            if (item == null) {
+                distribution.put(value, new DistributionItem(value));
+            } else {
+                item.incFrequency();
             }
-            distributionItem.incFrequency();
         }
         return distribution;
     }

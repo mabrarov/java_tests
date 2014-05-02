@@ -122,6 +122,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
      */
     private static <T> List<T> partialSorted(List<T> list, int count, Comparator<? super T> comparator) {
         assert count >= 0 : "Number of sorted items should be >= 0";
+        assert count <= list.size() : "Number of sorted items should be <= list.size()";
 
         if (count < 1) {
             return Collections.emptyList();
@@ -129,18 +130,17 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         if (count == 1) {
             return Collections.singletonList(Collections.min(list, comparator));
         }
-        final int listSize = list.size();
-        if (listSize <= 100000) {
-            final List<T> temp = new ArrayList<T>(list);
-            Collections.sort(temp, comparator);
-            return temp.subList(0, Math.min(listSize, count));
-        }
+        // Remove conditional branch from the cycle by splitting the only cycle into 2 cycles.
         final NavigableSet<T> set = new TreeSet<T>(comparator);
-        for (T t : list) {
-            set.add(t);
-            if (set.size() > count) {
-                set.pollLast();
-            }
+        final Iterator<T> iterator = list.iterator();
+        // The first cycle
+        for (int i = 0; i < count && iterator.hasNext(); ++i) {
+            set.add(iterator.next());
+        }
+        // The rest part of the cycle
+        while (iterator.hasNext()) {
+            set.add(iterator.next());
+            set.pollLast();
         }
         return new ArrayList<T>(set);
     }

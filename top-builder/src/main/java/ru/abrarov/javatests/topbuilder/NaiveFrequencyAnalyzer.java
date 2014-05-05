@@ -138,7 +138,7 @@ public class NaiveFrequencyAnalyzer implements FrequencyAnalyzer {
         final NavigableSet<T> set = new TreeSet<T>(comparator);
         final Iterator<T> iterator = collection.iterator();
         // The first cycle
-        for (int i = 0; i < count && iterator.hasNext(); ++i) {
+        for (int i = 0; i < count; ++i) {
             set.add(iterator.next());
         }
         // The rest part of the cycle

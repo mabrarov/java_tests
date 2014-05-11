@@ -1,9 +1,19 @@
-# Visual Studio project output folders.
+# Visual Studio 2012 project output folders.
 /build/msvc-11.0/out
 /build/msvc-11.0/projects/out
 
-# Visual Studio project temp files.
+# Visual Studio 2012 project temp files.
 /build/msvc-11.0/*.sdf
 /build/msvc-11.0/*.suo
 /build/msvc-11.0/*.opensdf
 /build/msvc-11.0/projects/*.vcxproj.user
+
+# Visual Studio 2013 project output folders.
+/build/msvc-12.0/out
+/build/msvc-12.0/projects/out
+
+# Visual Studio 2013 project temp files.
+/build/msvc-12.0/*.sdf
+/build/msvc-12.0/*.suo
+/build/msvc-12.0/*.opensdf
+/build/msvc-12.0/projects/*.vcxproj.user

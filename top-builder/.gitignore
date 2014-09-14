@@ -1,5 +1,7 @@
 # Maven target folder
 /target
+/top-builder/target
+/integration-test/target
 
 # Eclipse project settings
 /.settings

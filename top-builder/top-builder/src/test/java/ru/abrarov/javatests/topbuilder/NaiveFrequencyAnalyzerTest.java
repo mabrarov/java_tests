@@ -4,8 +4,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,6 +22,8 @@ import static org.junit.Assert.assertTrue;
  * @see NaiveFrequencyAnalyzer
  */
 public class NaiveFrequencyAnalyzerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(NaiveFrequencyAnalyzerTest.class);
 
     /**
      * Name of current running test
@@ -167,7 +175,7 @@ public class NaiveFrequencyAnalyzerTest {
         final List<String> values = buildSourceDataWithSomeEqualFrequencies();
         final int listSize = -3;
         printSourceDataAndTestParams(values, listSize);
-        System.out.println("Expected result: java.lang.AssertionError");
+        logger.info("Expected result: java.lang.AssertionError");
         final List<FrequencyAnalyzer.Item> actualResult;
         try {
             actualResult = frequencyAnalyzer.buildTopFrequentList(values.iterator(), listSize);
@@ -179,7 +187,7 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     private void testActualToBeEqualToExpected(List<String> values, int listSize,
-            List<FrequencyAnalyzer.Item> expectedResult) {
+                                               List<FrequencyAnalyzer.Item> expectedResult) {
         printSourceDataAndTestParams(values, listSize);
         printExpectedResult(expectedResult);
 
@@ -191,7 +199,7 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     private static void assertEquals(List<FrequencyAnalyzer.Item> expectedResult,
-            List<FrequencyAnalyzer.Item> actualResult) {
+                                     List<FrequencyAnalyzer.Item> actualResult) {
         assertTrue("Actual test result differs from expected test result", equals(expectedResult, actualResult));
     }
 
@@ -258,24 +266,24 @@ public class NaiveFrequencyAnalyzerTest {
     }
 
     private void printActualResult(Throwable e) {
-        System.out.println(String.format("Actual result  : %s", e));
+        logger.info(String.format("Actual result  : %s", e));
     }
 
     private void printTestHeader() {
-        System.out.println(String.format("--- %s#%s ---", getClass().getSimpleName(), testName.getMethodName()));
+        logger.info(String.format("--- %s#%s ---", getClass().getSimpleName(), testName.getMethodName()));
     }
 
     private void printExpectedResult(List<FrequencyAnalyzer.Item> expectedResult) {
-        System.out.println(String.format("Expected result: %s", resultToString(expectedResult)));
+        logger.info(String.format("Expected result: %s", resultToString(expectedResult)));
     }
 
     private void printActualResult(List<FrequencyAnalyzer.Item> actualResult) {
-        System.out.println(String.format("Actual result  : %s", resultToString(actualResult)));
+        logger.info(String.format("Actual result  : %s", resultToString(actualResult)));
     }
 
     private void printSourceDataAndTestParams(List<String> values, int listSize) {
-        System.out.println(String.format("Source data    : %s", sourceDataToString(values)));
-        System.out.println(String.format("Top list size  : %d", listSize));
+        logger.info(String.format("Source data    : %s", sourceDataToString(values)));
+        logger.info(String.format("Top list size  : %d", listSize));
     }
 
     /**

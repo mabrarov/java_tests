@@ -76,4 +76,37 @@ public class AutoCloseableParentTest {
         }
     }
 
+    public interface TestResource {
+
+    }
+
+    public static class TestResourceWrapper implements Wrapper<TestResource> {
+
+        private final TestResource wrappedObject;
+        private final LeakageToken<TestResource> leakageToken;
+
+        public TestResourceWrapper(final TestResource wrappedObject, final LeakageToken<TestResource> leakageToken) {
+            this.wrappedObject = wrappedObject;
+            this.leakageToken = leakageToken;
+        }
+
+        @Override
+        public TestResource getWrappedObject() {
+            return wrappedObject;
+        }
+
+        @Override
+        public LeakageToken<TestResource> getLeakageToken() {
+            return leakageToken;
+        }
+    }
+
+    public static class TestResourceWrapperBuilder implements WrapperBuilder<TestResource> {
+
+        @Override
+        public Wrapper<TestResource> createWrapper(final TestResource object, final LeakageToken<TestResource> leakageToken) {
+            return new TestResourceWrapper(object, leakageToken);
+        }
+    }
+
 }

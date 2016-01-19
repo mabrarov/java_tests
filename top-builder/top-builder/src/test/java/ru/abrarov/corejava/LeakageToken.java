@@ -4,6 +4,6 @@ import java.lang.ref.WeakReference;
 
 public interface LeakageToken<T> {
 
-    WeakReference<T> getWeakReference();
+    WeakReference<LeakageToken<T>> getWeakReference();
 
 }

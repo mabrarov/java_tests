@@ -31,10 +31,10 @@ public class AutoCloseableParentTest {
     }
 
     @Test
-    public void testExceptionInParentClose() throws Exception {
+    public void testExceptionInDerivedConstructor() throws Exception {
         final Resource resource = new Resource();
         try {
-            try (final Derived ignored = new Derived(resource, false, true, true)) {
+            try (final Derived ignored = new Derived(resource, false, false, true)) {
                 assertFalse(resource.isClosed());
             }
         } catch (final TestException ignored) {
@@ -45,10 +45,10 @@ public class AutoCloseableParentTest {
     }
 
     @Test
-    public void testExceptionInDerivedConstructor() throws Exception {
+    public void testExceptionInParentClose() throws Exception {
         final Resource resource = new Resource();
         try {
-            try (final Derived ignored = new Derived(resource, false, false, true)) {
+            try (final Derived ignored = new Derived(resource, false, true, true)) {
                 assertFalse(resource.isClosed());
             }
         } catch (final TestException ignored) {

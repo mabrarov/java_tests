@@ -13,8 +13,11 @@ Assuming:
   * `MinGW Makefiles` - for building with MinGW
   * `Unix Makefiles` - makefile for building on *nix
   * etc
-* `%build_type%` or `${build_type}` is the [type of build](https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html). 
+* `%build_type%` or `${build_type}` is the [type of build](https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html).
   Requirement to specify type of build depends on used CMake generator.
+  Most often used values:
+  * `Release`
+  * `Debug`
 
 ### Generating native project from CMake project
 

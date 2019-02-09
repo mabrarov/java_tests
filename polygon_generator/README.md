@@ -34,7 +34,7 @@ Assuming:
 * `%polygon_generator_dir%` or `${polygon_generator_dir}` is `polygon_generator` directory of local copy of this git repository
 * `%cmake_genarator%` or `${cmake_genarator}` is the name of [CMake generator](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html) to use:
   * `Visual Studio 12 2013 Win64` - Visual Studio 2013, x64 build with Visual C++
-  * `Visual Studio 14 2015 Win64` - Visual Studio 2013, x64 build with Visual C++
+  * `Visual Studio 14 2015 Win64` - Visual Studio 2015, x64 build with Visual C++
   * `NMake Makefiles` - for building with NMake
   * `MinGW Makefiles` - for building with MinGW
   * `Unix Makefiles` - makefile for building on *nix

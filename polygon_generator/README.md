@@ -65,8 +65,8 @@ Static C/C++ runtime, Windows Command Prompt and Visual Studio CMake generators:
 
 ```cmd
 cmake ^
--D CMAKE_USER_MAKE_RULES_OVERRIDE=%polygon_generator_dir%/cmake/static_c_runtime_overrides.cmake ^
--D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX=%polygon_generator_dir%/cmake/static_cxx_runtime_overrides.cmake ^
+-D CMAKE_USER_MAKE_RULES_OVERRIDE=%polygon_generator_dir%\cmake\static_c_runtime_overrides.cmake ^
+-D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX=%polygon_generator_dir%\cmake\static_cxx_runtime_overrides.cmake ^
 -G %cmake_genarator% %polygon_generator_dir% 
 ```
 

@@ -16,9 +16,7 @@ Git Bash or *nix shell
 ./polygon_generator [${number_of_generated_lines} [%{number_of_unique_values} [${max_length_of_line_to_generate} [${min_length_of_line_to_generate}]]]]
 ```
 
-### Parameters
-
-Assuming `%` and `${..}` are removed:
+Parameters, assuming `%` and `${..}` are removed:
 
 
 | # | Name | Format | Default value | Meaning |

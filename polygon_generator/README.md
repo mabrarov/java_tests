@@ -50,31 +50,31 @@ Assuming:
 Dynamic C/C++ runtime, Windows Command Prompt and Visual Studio CMake generators:
 
 ```cmd
-cmake -G "%cmake_generator%" %polygon_generator_dir%
+cmake -G "%cmake_generator%" "%polygon_generator_dir%"
 ```
 
 Dynamic C/C++ runtime, Git Bash with MinGW or shell on *nix:
 
 ```bash
-cmake -D CMAKE_BUILD_TYPE=${build_type} -G "${cmake_generator}" ${polygon_generator_dir}
+cmake -D CMAKE_BUILD_TYPE=${build_type} -G "${cmake_generator}" "${polygon_generator_dir}"
 ```
 
 Static C/C++ runtime, Windows Command Prompt and Visual Studio CMake generators:
 
 ```cmd
 cmake ^
--D CMAKE_USER_MAKE_RULES_OVERRIDE=%polygon_generator_dir%\cmake\static_c_runtime_overrides.cmake ^
--D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX=%polygon_generator_dir%\cmake\static_cxx_runtime_overrides.cmake ^
--G "%cmake_generator%" %polygon_generator_dir%
+-D CMAKE_USER_MAKE_RULES_OVERRIDE="%polygon_generator_dir%\cmake\static_c_runtime_overrides.cmake" ^
+-D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX="%polygon_generator_dir%\cmake\static_cxx_runtime_overrides.cmake" ^
+-G "%cmake_generator%" "%polygon_generator_dir%"
 ```
 
 Static C/C++ runtime, Git Bash with MinGW or shell on *nix:
 
 ```bash
 cmake \
--D CMAKE_USER_MAKE_RULES_OVERRIDE=${polygon_generator_dir}/cmake/static_c_runtime_overrides.cmake \
--D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX=${polygon_generator_dir}/cmake/static_cxx_runtime_overrides.cmake \
--D CMAKE_BUILD_TYPE=${build_type} -G "${cmake_generator}" ${polygon_generator_dir}
+-D CMAKE_USER_MAKE_RULES_OVERRIDE="${polygon_generator_dir}/cmake/static_c_runtime_overrides.cmake" \
+-D CMAKE_USER_MAKE_RULES_OVERRIDE_CXX="${polygon_generator_dir}/cmake/static_cxx_runtime_overrides.cmake" \
+-D CMAKE_BUILD_TYPE=${build_type} -G "${cmake_generator}" "${polygon_generator_dir}"
 ```
 
 ### Building generated native project

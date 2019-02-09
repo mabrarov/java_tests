@@ -1,5 +1,33 @@
 # Polygon Generator
 
+Generator of random data for [Polygon](https://polygon.codeforces.com/).
+
+## Usage
+
+Windows Command Prompt
+
+```
+polygon_generator.exe [%number_of_generated_lines% [%number_of_unique_values% [%max_length_of_line_to_generate% [%min_length_of_line_to_generate%]]]]
+```
+
+Git Bash or *nix shell
+
+```
+./polygon_generator [${number_of_generated_lines} [%{number_of_unique_values} [${max_length_of_line_to_generate} [${min_length_of_line_to_generate}]]]]
+```
+
+### Parameters
+
+Assuming `%` and `${..}` are removed:
+
+
+| # | Name | Format | Default value | Meaning |
+|---|---|---|---|---| 
+| 1 | number_of_generated_lines | positive integer < 2 ^ 128 (on x64 systems) | 1000000 | total number of lines to be generated |
+| 2 | number_of_unique_values | positive integer < 2 ^ 64 (on x64 systems) | 3/4 * number_of_generated_lines | number of unique lines to be generated |
+| 3 | max_length_of_line_to_generate | positive integer < 2 ^ 64 (on x64 systems) | 100 | maximum length of the generated line |
+| 4 | min_length_of_line_to_generate | positive integer < 2 ^ 64 (on x64 systems) | 0 | minimum length of the generated line |
+
 ## How to build
 
 Assuming:

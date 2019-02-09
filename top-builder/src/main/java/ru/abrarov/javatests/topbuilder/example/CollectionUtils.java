@@ -5,9 +5,10 @@ import java.util.*;
 /**
  * Utility algorithms for JCF.
  */
-public class CollectionUtils {
+public final class CollectionUtils {
 
   private CollectionUtils() {
+    throw new AssertionError("Utility classes cannot be instantiated");
   }
 
   /**

@@ -8,9 +8,10 @@ import java.util.Random;
  * Utilities for generation of random values. May be replaced with another ready solution. Implemented here to make app
  * depends only on JRE 1.5.
  */
-public class RandomUtils {
+public final class RandomUtils {
 
   private RandomUtils() {
+    throw new AssertionError("Utility classes cannot be instantiated");
   }
 
   /**

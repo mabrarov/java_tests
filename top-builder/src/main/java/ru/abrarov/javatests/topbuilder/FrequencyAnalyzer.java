@@ -13,7 +13,7 @@ public interface FrequencyAnalyzer {
   /**
    * Top list item.
    */
-  public static interface Item {
+  interface Item {
 
     /**
      * Gets the value of the top list item.
@@ -37,5 +37,5 @@ public interface FrequencyAnalyzer {
    * @param size   The maximum size of the list to be built. Must be >= 0.
    * @return List of the most frequent values with their frequencies.
    */
-  public List<Item> buildTopFrequentList(Iterator<String> values, int size);
+  List<Item> buildTopFrequentList(Iterator<String> values, int size);
 }

@@ -50,9 +50,9 @@ std::string to_string(const T& value)
   return stream.str();
 }
 
-typedef unsigned long long uintmax_t;
+typedef unsigned long long std_uintmax_t;
 
-void generate(uintmax_t line_count, const pattern& str_generator,
+void generate(std_uintmax_t line_count, const pattern& str_generator,
               random_t& rnd, std::ostream& stream)
 {
   // Generated & output data    
@@ -62,7 +62,7 @@ void generate(uintmax_t line_count, const pattern& str_generator,
   }
 }
 
-void generate(uintmax_t line_count, std::size_t unique_line_count,
+void generate(std_uintmax_t line_count, std::size_t unique_line_count,
               const pattern& str_generator, random_t& rnd, 
               std::ostream& stream)
 {
@@ -90,12 +90,12 @@ int main(int argc, char* argv[])
 #endif
 {
   try
-  {        
+  {
     registerGen(argc, argv, 1);
 
     // Parse CLI parameters
-    const uintmax_t line_count = argc > 1 ? 
-        from_string<uintmax_t>(argv[1]) : 1000000L;
+    const std_uintmax_t line_count = argc > 1 ? 
+        from_string<std_uintmax_t>(argv[1]) : 1000000L;
     const std::size_t unique_line_count = argc > 2 ? 
         from_string<std::size_t>(argv[2]) : line_count * 3 / 4;
     const std::size_t max_line_len = argc > 3 ? 
